@@ -1,36 +1,26 @@
 import React from 'react'
-import './style.css'
+import { connect } from 'react-redux'
+import { increment, decrement } from '../store/action-creators'
+import './counter.css'
 
-export class Counter extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      counter: 0,
-    };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-  }
+export const CounterComponent = ({ counter, increment, decrement }) => (
+  <div>
+    <p className="counter">Counter: {counter}</p>
+    <button className="btn btn-increment" onClick={increment}>+</button>
+    <button className="btn btn-decrement" onClick={decrement}>-</button>
+  </div>
+)
 
-  increment() {
-    this.setState(state => ({
-      counter: state.counter + 1,
-    }))
-  }
+const mapStateToProps = ({ counter }) => ({
+  counter,
+})
 
-  decrement() {
-    this.setState(state => ({
-      counter: state.counter - 1,
-    }))
-  }
-
-  render() {
-    const { counter } = this.state;
-    return (
-      <div>
-        <p className="counter">Counter: {counter}</p>
-        <button className="btn btn-increment" onClick={this.increment}>+</button>
-        <button className="btn btn-decrement" onClick={this.decrement}>-</button>
-      </div>
-    )
-  }
+const mapDispatchToProps = {
+  increment,
+  decrement,
 }
+
+export const Counter = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CounterComponent)

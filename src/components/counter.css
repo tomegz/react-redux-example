@@ -1,9 +1,8 @@
-.counter {
+.btn, .counter {
   font-size: 1.5rem;
 }
 
 .btn {
-  font-size: 1.5rem;
-  width: 80px;
   cursor: pointer;
+  padding: 0 25px;
 }
